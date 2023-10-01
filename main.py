@@ -45,7 +45,7 @@ def pad(x,y):
 
 
 
-def subquadratic_multiply(x, y):
+def _subquadratic_multiply(x, y):
     ### TODO
     xvec = x.binary_vec
     yvec = y.binary_vec
