@@ -47,7 +47,36 @@ def pad(x,y):
 
 def subquadratic_multiply(x, y):
     ### TODO
-    pass
+    xvec = x.binary_vec
+    yvec = y.binary_vec
+  
+    padding = pad(xvec, yvec)
+    xvec = padding[0]
+    yvec = padding[1]
+
+    if x.decimal_val <= 1 and y.decimal_val <= 1:
+        return BinaryNumber(x.decimal_val*y.decimal_val)
+
+    else: 
+
+        x_left = split_number(xvec)[0]
+        x_right = split_number(xvec)[1]
+        y_left = split_number(yvec)[0]
+        y_right = split_number(yvec)[1]
+
+        xl_yl = _subquadratic_multiply(x_left, y_left)
+        xr_yr = _subquadratic_multiply(x_right, y_right)
+      
+        xl_plus_xr = BinaryNumber(x_left.decimal_val + x_right.decimal_val)
+        yl_plus_yr = BinaryNumber(y_left.decimal_val + y_right.decimal_val)
+        sum_product = _subquadratic_multiply(xl_plus_xr, yl_plus_yr)
+
+        val = BinaryNumber(sum_product.decimal_val - xl_yl.decimal_val - xr_yr.decimal_val)
+  
+        shift1 = bit_shift(val, len(xvec)//2)
+        shift2 = bit_shift(xl_yl, len(xvec))
+     
+        return BinaryNumber(shift1.decimal_val + shift2.decimal_val + xr_yr.decimal_val)
     ###
 
 
