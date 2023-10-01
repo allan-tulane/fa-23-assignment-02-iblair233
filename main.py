@@ -43,7 +43,8 @@ def pad(x,y):
         y = ['0'] + y
     return x,y
 
-
+def subquadratic_multiply(x, y):
+    return _subquadratic_multiply(x,y).decimal_val
 
 def _subquadratic_multiply(x, y):
     ### TODO
